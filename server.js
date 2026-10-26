@@ -57,9 +57,12 @@ app.put('/messages', (req, res) => {
 app.put('/dislike', (req, res) => {
   db.collection('messages')
   .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
-    $set: {
-      thumbDown:req.body.thumbDown - 1
+    $inc: {
+      thumbUp: -1
     }
+    // $set: {
+    //   thumbUp:req.body.thumbUp - 1
+    // }
   }, {
     sort: {_id: -1},
     upsert: true
